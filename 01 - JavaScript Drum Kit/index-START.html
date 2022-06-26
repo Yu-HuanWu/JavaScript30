@@ -74,7 +74,18 @@
     event.target.classList.remove('buttonPressed');
   }
 
+  const keys = Array.from(document.querySelectorAll('.key'));
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown', playSound);
 
+  // const clicks = Array.from(document.querySelectorAll('.key'));
+  // clicks.forEach(key => {
+  //   key.addEventListener('click', playSound);
+  //   console.log(key)
+  //   key.addEventListener('transitionend', removeTransition);
+    
+  // });
+  // window.addEventListener('click', playSound);
 </script>
 
 
