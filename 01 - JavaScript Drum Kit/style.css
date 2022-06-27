@@ -8,18 +8,34 @@ body,html {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
-.keys {
+.logo {
   display: flex;
-  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
+  font-size: 2.2rem;
+  color: #ffc600;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   align-items: center;
   justify-content: center;
 }
 
+.keys {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .key {
-  border: .4rem solid black;
+  border: .4rem solid rgb(146, 5, 159);
   border-radius: .5rem;
   margin: 1rem;
   font-size: 1.5rem;
@@ -28,8 +44,15 @@ body,html {
   width: 10rem;
   text-align: center;
   color: white;
-  background: rgba(0,0,0,0.4);
+  background: rgba(137, 137, 137, 0.4);
   text-shadow: 0 0 .5rem black;
+}
+
+.space {
+  border-radius: .5rem;
+  margin: 1rem;
+  padding: 1rem .5rem;
+  width: 5rem;
 }
 
 .buttonPressed {
@@ -43,7 +66,7 @@ kbd {
   font-size: 4rem;
 }
 
-.sound {
+.lyrics {
   font-size: 1.2rem;
   text-transform: uppercase;
   letter-spacing: .1rem;

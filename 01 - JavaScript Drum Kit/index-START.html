@@ -2,60 +2,111 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>JS Drum Kit</title>
+    <title>Daft Punk Soundboard</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <div class="rows">
+      <div class="logo">
+        <img src="logo.png" height="250px" alt="daft punk logo"/>
+        <h1>SOUNDBOARD</h1>
+      </div>
 
+      <div class="keys">
+        <div data-key="65" class="key">
+          <kbd>A</kbd>
+          <span class="lyrics">Work it</span>
+        </div>
+        <div data-key="83" class="key">
+          <kbd>S</kbd>
+          <span class="lyrics">Make it</span>
+        </div>
+        <div data-key="68" class="key">
+          <kbd>D</kbd>
+          <span class="lyrics">Do it</span>
+        </div>
+        <div data-key="70" class="key">
+          <kbd>F</kbd>
+          <span class="lyrics">Makes us</span>
+        </div>
 
-    <div class="keys">
-      <div data-key="65" class="key">
-        <kbd>A</kbd>
-        <span class="sound">clap</span>
+        <div class="space"></div>
+        <div class="space"></div>
+
+        <div data-key="74" class="key">
+          <kbd>J</kbd>
+          <span class="lyrics">More than</span>
+        </div>
+        <div data-key="75" class="key">
+          <kbd>K</kbd>
+          <span class="lyrics">Hour</span>
+        </div>
+        <div data-key="76" class="key">
+          <kbd>L</kbd>
+          <span class="lyrics">Our</span>
+        </div>
+        <div data-key="59" class="key">
+          <kbd>;</kbd>
+          <span class="lyrics">Never</span>
+        </div>
       </div>
-      <div data-key="83" class="key">
-        <kbd>S</kbd>
-        <span class="sound">hihat</span>
+
+      <div class="keys">
+        <div data-key="90" class="key">
+          <kbd>Z</kbd>
+          <span class="lyrics">Harder</span>
+        </div>
+        <div data-key="88" class="key">
+          <kbd>X</kbd>
+          <span class="lyrics">Better</span>
+        </div>
+        <div data-key="67" class="key">
+          <kbd>C</kbd>
+          <span class="lyrics">Faster</span>
+        </div>
+        <div data-key="86" class="key">
+          <kbd>V</kbd>
+          <span class="lyrics">Stronger</span>
+        </div>
+
+        <div class="space"></div>
+
+        <div data-key="78" class="key">
+          <kbd>N</kbd>
+          <span class="lyrics">Ever</span>
+        </div>
+        <div data-key="77" class="key">
+          <kbd>M</kbd>
+          <span class="lyrics">After</span>
+        </div>
+        <div data-key="108" class="key">
+          <kbd>,</kbd>
+          <span class="lyrics">Work is</span>
+        </div>
+        <div data-key="190" class="key">
+          <kbd>.</kbd>
+          <span class="lyrics">Over</span>
+        </div>
       </div>
-      <div data-key="68" class="key">
-        <kbd>D</kbd>
-        <span class="sound">kick</span>
-      </div>
-      <div data-key="70" class="key">
-        <kbd>F</kbd>
-        <span class="sound">openhat</span>
-      </div>
-      <div data-key="71" class="key">
-        <kbd>G</kbd>
-        <span class="sound">boom</span>
-      </div>
-      <div data-key="72" class="key">
-        <kbd>H</kbd>
-        <span class="sound">ride</span>
-      </div>
-      <div data-key="74" class="key">
-        <kbd>J</kbd>
-        <span class="sound">snare</span>
-      </div>
-      <div data-key="75" class="key">
-        <kbd>K</kbd>
-        <span class="sound">tom</span>
-      </div>
-      <div data-key="76" class="key">
-        <kbd>L</kbd>
-        <span class="sound">tink</span>
-      </div>
+
     </div>
 
-    <audio data-key="65" src="sounds/clap.wav"></audio>
-    <audio data-key="83" src="sounds/hihat.wav"></audio>
-    <audio data-key="68" src="sounds/kick.wav"></audio>
-    <audio data-key="70" src="sounds/openhat.wav"></audio>
-    <audio data-key="71" src="sounds/boom.wav"></audio>
-    <audio data-key="72" src="sounds/ride.wav"></audio>
-    <audio data-key="74" src="sounds/snare.wav"></audio>
-    <audio data-key="75" src="sounds/tom.wav"></audio>
-    <audio data-key="76" src="sounds/tink.wav"></audio>
+    <audio data-key="65" src="sounds/sounds_work_it.wav"></audio>
+    <audio data-key="83" src="sounds/sounds_make_it.wav"></audio>
+    <audio data-key="68" src="sounds/sounds_do_it.wav"></audio>
+    <audio data-key="70" src="sounds/sounds_makes_us.wav"></audio>
+    <audio data-key="74" src="sounds/sounds_more_than.wav"></audio>
+    <audio data-key="75" src="sounds/sounds_hour.wav"></audio>
+    <audio data-key="76" src="sounds/sounds_our.wav"></audio>
+    <audio data-key="59" src="sounds/sounds_never.wav"></audio>
+    <audio data-key="90" src="sounds/sounds_harder.wav"></audio>
+    <audio data-key="88" src="sounds/sounds_better.wav"></audio>
+    <audio data-key="67" src="sounds/sounds_faster.wav"></audio>
+    <audio data-key="86" src="sounds/sounds_stronger.wav"></audio>
+    <audio data-key="78" src="sounds/sounds_ever.wav"></audio>
+    <audio data-key="77" src="sounds/sounds_after.wav"></audio>
+    <audio data-key="108" src="sounds/sounds_work_is.wav"></audio>
+    <audio data-key="190" src="sounds/sounds_over.wav"></audio>
 
     <script>
 
@@ -63,8 +114,16 @@
         let audio;
         let key;
         if (event.type === "keydown") {
-          audio = document.querySelector(`audio[data-key="${event.keyCode}"]`);
-          key = document.querySelector(`div[data-key="${event.keyCode}"]`);
+          // apparently event.keyCode for ; and , in mozilla firefox is different
+          // from everywhere else. 
+          let altKeyCode = event.keyCode
+          if (event.keyCode === 186) {
+            altKeyCode = 59;
+          } else if (event.keyCode === 188){
+            altKeyCode = 108
+          }
+          audio = document.querySelector(`audio[data-key="${altKeyCode}"]`);
+          key = document.querySelector(`div[data-key="${altKeyCode}"]`);
         } else if (event.type === "click") {
           // a mouse click could either be on <kbd> or <div> whicch affect event.path's array
           // to ensure both clicking on <kbd> and <div> works, we check for either 
