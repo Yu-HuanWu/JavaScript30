@@ -91,6 +91,10 @@ kbd {
   .logo {
     font-size: 2rem;
     color: #ffc600;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
   }
 
   .logoimg {
