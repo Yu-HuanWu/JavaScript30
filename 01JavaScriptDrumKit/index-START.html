@@ -154,7 +154,9 @@
       if (window.screen.width > 820) {
         window.addEventListener('click', playSound);
       } else {
-        window.addEventListener('touchstart', playSound)
+        window.addEventListener('DOMContentLoaded', (event) => {
+          window.addEventListener('touchstart', playSound)
+        });
       }
     </script>
   </body>
