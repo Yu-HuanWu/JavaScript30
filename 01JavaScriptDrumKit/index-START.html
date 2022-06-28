@@ -114,6 +114,7 @@
       function playSound(event) {
         let audio;
         let key;
+        let touch = false;
         if (event.type === "keydown") {
           // apparently event.keyCode for ; and , in mozilla firefox is different
           // from everywhere else. 
@@ -131,7 +132,7 @@
           // event.path's index 1 or 0, which gives us dataset.key
           let keyCode = event.path[1].dataset.key || event.path[0].dataset.key
           audio = document.querySelector(`audio[data-key="${keyCode}"]`);
-          key = document.querySelector(`div[data-key="${keyCode}"]`);  
+          key = document.querySelector(`div[data-key="${keyCode}"]`);
         }
         if (!audio) return;
 
@@ -148,8 +149,13 @@
       const keys = Array.from(document.querySelectorAll('.key'));
       keys.forEach(key => key.addEventListener('transitionend', removeTransition));
       window.addEventListener('keydown', playSound);
-      // window.addEventListener('click', playSound);
-      window.addEventListener('touchstart', playSound)
+
+      console.log(window.screen.width)
+      if (window.screen.width > 820) {
+        window.addEventListener('click', playSound);
+      } else {
+        window.addEventListener('touchstart', playSound)
+      }
     </script>
   </body>
 </html>
