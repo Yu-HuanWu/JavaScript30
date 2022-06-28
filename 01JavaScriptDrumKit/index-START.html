@@ -125,7 +125,7 @@
           }
           audio = document.querySelector(`audio[data-key="${altKeyCode}"]`);
           key = document.querySelector(`div[data-key="${altKeyCode}"]`);
-        } else if (event.type === "click") {
+        } else if (event.type === "click" || event.type === "touchstart") {
           // a mouse click could either be on <kbd> or <div> whicch affect event.path's array
           // to ensure both clicking on <kbd> and <div> works, we check for either 
           // event.path's index 1 or 0, which gives us dataset.key
@@ -148,7 +148,7 @@
       const keys = Array.from(document.querySelectorAll('.key'));
       keys.forEach(key => key.addEventListener('transitionend', removeTransition));
       window.addEventListener('keydown', playSound);
-      window.addEventListener('click', playSound);
+      // window.addEventListener('click', playSound);
       window.addEventListener('touchstart', playSound)
     </script>
   </body>
