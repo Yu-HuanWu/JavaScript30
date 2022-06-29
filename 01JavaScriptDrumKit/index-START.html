@@ -152,10 +152,7 @@
       if (window.screen.width > 820) {
         window.addEventListener('click', playSound);
       } else {
-        // window.addEventListener('DOMContentLoaded', (event) => {
-        //   event.preventDefault() // testing, not sure if it will work
-        //   window.addEventListener('touchstart', playSound)
-        // });
+        // document instead of window because window doesn't work on iOS
         document.addEventListener('click', playSound);
       }
     </script>
