@@ -18,7 +18,7 @@
 
   <style>
     html {
-      background: #070707 url(https://unsplash.it/1500/1000?image=881&blur=5);
+      background: #070707;
       background-size: cover;
       font-family: 'helvetica neue';
       text-align: center;
@@ -33,6 +33,7 @@
       flex: 1;
       min-height: 100vh;
       align-items: center;
+      background-size: cover;
     }
 
     .clock {
@@ -40,14 +41,15 @@
       height: 30rem;
       border: 20px solid white;
       border-radius: 50%;
+      background-color: #00000039;
       margin: 50px auto;
       position: relative;
       padding: 2rem;
       box-shadow:
-        0 0 0 4px rgba(0,0,0,0.1),
+        0 0 0 9px rgba(0,0,0,0.5),
         inset 0 0 0 3px #EFEFEF,
         inset 0 0 10px black,
-        0 0 10px rgba(0,0,0,0.2);
+        0 0 10px rgba(0,0,0,0.3);
     }
 
     .clock-face {
@@ -200,29 +202,35 @@
       "America/Whitehorse",
       "Pacific/Palau",
       "America/Yellowknife",
-      "America/Godthab",
+      "America/Nuuk",
       "Pacific/Rarotonga",
       "Asia/Anadyr",
       "America/Dawson_Creek",
-      "America/Adak"
+      "America/Adak",
+      "Pacific/Gambier",
+      "America/Noronha",
     ];
-    let fiveOClockLocation;
+
+    let fiveOClockLocations = [];
     let locations = {}
-    let badtimezone = []
     TimeZones.forEach((e)=>{
       let time = new Date().toLocaleString('en-GB', { timeZone: e })
       let hour = time.substring(12, 14)
+
       if (locations[hour]) {
         locations[hour].push(e)
       } else {
         locations[hour] = [e]
       }
+
       if (time.substring(12,14) === '17') {
         console.log(e)
-        let fiveOClockLocation = e.slice(e.indexOf('/')+1).replace('_', ' ')
-        document.querySelector('.location').innerHTML = fiveOClockLocation
+        fiveOClockLocations.push(e.slice(e.indexOf('/')+1).replace('_', ' '))
       }
     })
+
+    document.querySelector('.location').innerHTML = fiveOClockLocations[Math.floor(Math.random() * fiveOClockLocations.length)]
+    document.body.background = "backgrounds/beerfrog.jpeg";
     console.log(locations)
     function setDate() {
       const now = new Date();
