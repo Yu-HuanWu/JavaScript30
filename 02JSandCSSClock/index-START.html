@@ -5,15 +5,17 @@
   <title>It's 5 o'Clock Somewhere</title>
 </head>
 <body>
-  <h1>It is 5 o'Clock in</h1>
-  <h1 class="location"></h1>
-  <div class="clock">
-    <div class="clock-face">
-      <div class="hand hour-hand"></div>
-      <div class="hand min-hand"></div>
-      <div class="hand second-hand"></div>
+  <background>
+    <h1>It is 5 o'Clock in</h1>
+    <h1 class="location"></h1>
+    <div class="clock">
+      <div class="clock-face">
+        <div class="hand hour-hand"></div>
+        <div class="hand min-hand"></div>
+        <div class="hand second-hand"></div>
+      </div>
     </div>
-  </div>
+  </background>
 
 
   <style>
@@ -36,6 +38,16 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      backdrop-filter: blur(8px);
+    }
+
+    background {
+      backdrop-filter: blur(3px);
+      margin: 0;
+      font-size: 2rem;
+      min-height: 100vh;
+      min-width: 100vw;
+      align-items: center;
     }
 
     .clock {
