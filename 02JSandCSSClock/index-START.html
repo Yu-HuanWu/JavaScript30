@@ -168,7 +168,7 @@
     const minsHand = document.querySelector('.min-hand');
     const hourHand = document.querySelector('.hour-hand');
     const TimeZones = [
-      { timezone: "Asia/Tokyo", name: "Tokyo, Japan", image: "", imageCredit: "" },
+      { timezone: "Asia/Tokyo", name: "Tokyo, Japan", image: "backgrounds/tokyo.jpg", imageCredit: "RBeil" },
       { timezone: "Asia/Seoul", name: "Seoul, South Korea", image: "", imageCredit: "" },
       { timezone: "America/New_York", name: "New York, USA", image: "", imageCredit: "" },
       { timezone: "America/Sao_Paulo", name: "São Paulo, Brazil", image: "", imageCredit: "" },
@@ -316,7 +316,7 @@
       if (now.getHours() !== 17) {
         document.querySelector('.localtime').innerHTML = `but for you, it is still ${now.toLocaleString('en-US')} 😭`
       } else {
-        document.querySelector('.localtime').innerHTML = "and for YOU as well! 🍻"
+        document.querySelector('.localtime').innerHTML = "🍺 and for YOU as well! 🍺"
       }
     }
 
