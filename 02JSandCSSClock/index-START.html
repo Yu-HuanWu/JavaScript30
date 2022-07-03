@@ -195,29 +195,29 @@
       { timezone: "Asia/Hovd", name: "Khovd, Mongolia", image: "", imageCredit: "" },
       { timezone: "Europe/Andorra", name: "Andorra", image: "", imageCredit: "" },
       { timezone: "Asia/Thimphu", name: "Thimphu, Bhutan", image: "", imageCredit: "" },
-      { timezone: "Indian/Mahe", name: "", image: "", imageCredit: "" },
-      { timezone: "Pacific/Tongatapu", name: "", image: "", imageCredit: "" },
-      { timezone: "Pacific/Efate", name: "", image: "", imageCredit: "" },
-      { timezone: "Atlantic/Bermuda", name: "", image: "", imageCredit: "" },
-      { timezone: "America/Belize", name: "", image: "", imageCredit: "" },
-      { timezone: "Atlantic/Faroe", name: "", image: "", imageCredit: "" },
-      { timezone: "Pacific/Chuuk", name: "", image: "", imageCredit: "" },
-      { timezone: "Pacific/Apia", name: "", image: "", imageCredit: "" },
-      { timezone: "Pacific/Pohnpei", name: "", image: "", imageCredit: "" },
-      { timezone: "America/Juneau", name: "", image: "", imageCredit: "" },
-      { timezone: "Europe/Gibraltar", name: "", image: "", imageCredit: "" },
-      { timezone: "Pacific/Majuro", name: "", image: "", imageCredit: "" },
-      { timezone: "Pacific/Galapagos", name: "", image: "", imageCredit: "" },
-      { timezone: "America/Whitehorse", name: "", image: "", imageCredit: "" },
-      { timezone: "Pacific/Palau", name: "", image: "", imageCredit: "" },
-      { timezone: "America/Yellowknife", name: "", image: "", imageCredit: "" },
-      { timezone: "America/Nuuk", name: "", image: "", imageCredit: "" },
-      { timezone: "Pacific/Rarotonga", name: "", image: "", imageCredit: "" },
-      { timezone: "Asia/Anadyr", name: "", image: "", imageCredit: "" },
-      { timezone: "America/Dawson_Creek", name: "", image: "", imageCredit: "" },
-      { timezone: "America/Adak", name: "", image: "", imageCredit: "" },
-      { timezone: "Pacific/Gambier", name: "", image: "", imageCredit: "" },
-      { timezone: "America/Noronha", name: "", image: "", imageCredit: "" },
+      { timezone: "Indian/Mahe", name: "Mahé, Seychelles", image: "", imageCredit: "" },
+      { timezone: "Pacific/Tongatapu", name: "Tongatapu, Tonga", image: "", imageCredit: "" },
+      { timezone: "Pacific/Efate", name: "Efate, Vanuatu", image: "", imageCredit: "" },
+      { timezone: "Atlantic/Bermuda", name: "Bermuda", image: "", imageCredit: "" },
+      { timezone: "America/Belize", name: "Belize", image: "", imageCredit: "" },
+      { timezone: "Atlantic/Faroe", name: "Faroe Islands", image: "", imageCredit: "" },
+      { timezone: "Pacific/Chuuk", name: "Chuuk, Micronesia", image: "", imageCredit: "" },
+      { timezone: "Pacific/Apia", name: "Apia, Samoa", image: "", imageCredit: "" },
+      { timezone: "Pacific/Pohnpei", name: "Pohnpei, Micronesia", image: "", imageCredit: "" },
+      { timezone: "America/Juneau", name: "Juneau, USA", image: "", imageCredit: "" },
+      { timezone: "Europe/Gibraltar", name: "Gibraltar", image: "", imageCredit: "" },
+      { timezone: "Pacific/Majuro", name: "Majuro, Marshall Islands", image: "", imageCredit: "" },
+      { timezone: "Pacific/Galapagos", name: "Galápagos Islands, Ecuador", image: "", imageCredit: "" },
+      { timezone: "America/Whitehorse", name: "Whitehorse, Canada", image: "", imageCredit: "" },
+      { timezone: "Pacific/Palau", name: "Palau", image: "", imageCredit: "" },
+      { timezone: "America/Yellowknife", name: "Yellowknife, Canada", image: "", imageCredit: "" },
+      { timezone: "America/Nuuk", name: "Nuuk, Greenland", image: "", imageCredit: "" },
+      { timezone: "Pacific/Rarotonga", name: "Rarotonga, Cook Islands", image: "", imageCredit: "" },
+      { timezone: "Asia/Anadyr", name: "Anadyr, Russia", image: "", imageCredit: "" },
+      { timezone: "America/Dawson_Creek", name: "Dawson Creek, Canada", image: "", imageCredit: "" },
+      { timezone: "America/Adak", name: "Adak, USA", image: "", imageCredit: "" },
+      { timezone: "Pacific/Gambier", name: "Gambier Island, French Polynesia", image: "", imageCredit: "" },
+      { timezone: "America/Noronha", name: "Fernando de Noronha, Brazil", image: "", imageCredit: "" },
     ];
 
     let fiveOClockLocations = [];
@@ -234,11 +234,11 @@
 
       if (time.substring(12,14) === '17') {
         console.log(e)
-        fiveOClockLocations.push(e.timezone.slice(e.timezone.indexOf('/')+1).replace('_', ' '))
+        fiveOClockLocations.push(e)
       }
     })
 
-    document.querySelector('.location').innerHTML = fiveOClockLocations[Math.floor(Math.random() * fiveOClockLocations.length)]
+    document.querySelector('.location').innerHTML = fiveOClockLocations[Math.floor(Math.random() * fiveOClockLocations.length)].name
     document.body.background = "backgrounds/beerfrog.jpeg";
     console.log(locations)
     function setDate() {
