@@ -164,14 +164,23 @@
     }
 
     .localtime {
-      color:rgba(0, 0, 0, 0.8);
-      text-shadow: 1px 1px 3px #d6d5d577;
+      font-family: Arial, Helvetica, sans-serif;
+      color:rgba(0, 0, 0, 0.901);
+      font-weight: bolder;
+      text-shadow: 0px 1px 4px #ffffff;
+      -webkit-text-stroke: 0.3px rgb(117, 117, 117);
     }
 
     @media screen and (max-width: 820px) {
       .credit {
         top: 95%;
         right: 5%;
+      }
+
+      .localtime {
+        font-size: 2.5rem;
+        margin: 20px;
+        padding-bottom: 70px;
       }
     }
   </style>
@@ -182,11 +191,11 @@
     const hourHand = document.querySelector('.hour-hand');
     const TimeZones = [
       { timezone: "Asia/Tokyo", name: "Tokyo, Japan", image: "backgrounds/tokyo.jpg", imageCredit: "RBeil" },
-      { timezone: "Asia/Seoul", name: "Seoul, South Korea", image: "", imageCredit: "" },
+      { timezone: "Asia/Seoul", name: "Seoul, South Korea", image: "backgrounds/seoul.jpg", imageCredit: "Didier Marti" },
       { timezone: "America/New_York", name: "New York, USA", image: "backgrounds/newyork.jpg", imageCredit: "Marco Bottigelli" },
-      { timezone: "America/Sao_Paulo", name: "São Paulo, Brazil", image: "", imageCredit: "" },
-      { timezone: "Africa/Cairo", name: "Cairo, Egypt", image: "", imageCredit: "" },
-      { timezone: "America/Los_Angeles", name: "Los Angeles, USA", image: "", imageCredit: "" },
+      { timezone: "America/Sao_Paulo", name: "São Paulo, Brazil", image: "backgrounds/saopaulo.jpg", imageCredit: "wsfurlan" },
+      { timezone: "Africa/Cairo", name: "Cairo, Egypt", image: "backgrounds/cairo.jpg", imageCredit: "Anton Aleksenko" },
+      { timezone: "America/Los_Angeles", name: "Los Angeles, USA", image: "backgrounds/losangeles.jpg", imageCredit: "Stoycho Stoychev" },
       { timezone: "Asia/Bangkok", name: "Chiang Mai, Thailand", image: "backgrounds/chiangmai.jpg", imageCredit: "RBeil" },
       { timezone: "Europe/Istanbul", name: "Istanbul, Turkey", image: "backgrounds/istanbul.jpg", imageCredit: "Jennifer Richwood" },
       { timezone: "Europe/Paris", name: "Paris, France", image: "", imageCredit: "" },
@@ -199,8 +208,8 @@
       { timezone: "America/Toronto", name: "Toronto, Canada", image: "backgrounds/toronto.jpg", imageCredit: "Arild Vågen" },
       { timezone: "Asia/Singapore", name: "Singapore", image: "", imageCredit: "" },
       { timezone: "Africa/Nairobi", name: "Nairobi, Kenya", image: "", imageCredit: "" },
-      { timezone: "Africa/Accra", name: "Accra, Ghana", image: "", imageCredit: "" },
-      { timezone: "Australia/Sydney", name: "Sydney, Australia", image: "", imageCredit: "" },
+      { timezone: "Africa/Accra", name: "Accra, Ghana", image: "", imageCredit: "Felix Lipov" },
+      { timezone: "Australia/Sydney", name: "Sydney, Australia", image: "backgrounds/accra.jpg", imageCredit: "" },
       { timezone: "Europe/Rome", name: "Rome, Italy", image: "", imageCredit: "" },
       { timezone: "Australia/Melbourne", name: "Melbourne, Australia", image: "", imageCredit: "" },
       { timezone: "Europe/Athens", name: "Athens, Greece", image: "", imageCredit: "" },
