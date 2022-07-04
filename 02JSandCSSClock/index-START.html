@@ -3,12 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <title>It's 5 O'Clock Somewhere</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
 </head>
 <body>
   <background>
-    <h1>It is 5 O'Clock in</h1>
-    <h1 class="location"></h1>
+    <div class="title">
+      <h1>It is 5 O'Clock in</h1>
+      <h1 class="location"></h1>
+    </div>
     <div class="clock">
       <div class="clock-face">
         <div class="hand hour-hand"></div>
@@ -41,16 +44,20 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      backdrop-filter: blur(8px);
     }
 
     background {
-      backdrop-filter: blur(2px);
+      backdrop-filter: blur(0.5px);
       margin: 0;
       font-size: 2rem;
       min-height: 100vh;
       min-width: 100vw;
       align-items: center;
+    }
+
+    .title {
+      background-color: rgba(0, 0, 0, 0.234);
+      box-shadow: 0 0 50px 50px rgba(0, 0, 0, 0.234);
     }
 
     .clock {
@@ -113,10 +120,10 @@
     h1 {
       font-family: 'Pacifico', sans-serif;
       color: blue;
-      text-shadow: 2px 2px 5px #0000002c;
-      background: linear-gradient(110deg, #adefff 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(110deg, #C5E7D7 34%, #88d8b0 34%);
+      /* text-shadow: 3px 5px 3px #00000035; */
+      background: linear-gradient(110deg, #8ee3f8 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(110deg, #b4efd4 34%, #85edb9 34%);
       background-size: 400%;
-      -webkit-text-fill-color: transparent;
+      -webkit-text-fill-color:rgba(255, 255, 255, 0);
       -webkit-background-clip: text;
       background-clip: text;
       animation: Gradient 5s ease infinite;
@@ -152,7 +159,7 @@
       color:rgba(255, 255, 255, 0.6);
       position: absolute;
       top: 90%;
-      right: 10%;
+      right: 5%;
       text-shadow: 1px 1px 2px #0000004b;
     }
 
@@ -161,6 +168,12 @@
       text-shadow: 1px 1px 3px #d6d5d577;
     }
 
+    @media screen and (max-width: 820px) {
+      .credit {
+        top: 95%;
+        right: 5%;
+      }
+    }
   </style>
 
   <script>
@@ -213,7 +226,7 @@
       { timezone: "America/Costa_Rica", name: "Costa Rica", image: "", imageCredit: "" },
       { timezone: "Asia/Tbilisi", name: "Tbilisi, Georgia", image: "", imageCredit: "" },
       { timezone: "America/Jamaica", name: "Jamaica", image: "backgrounds/jamaica.jpg", imageCredit: "Konstantin Kulikov" },
-      { timezone: "Pacific/Fiji", name: "Fiji", image: "", imageCredit: "" },
+      { timezone: "Pacific/Fiji", name: "Fiji", image: "backgrounds/fiji.jpg", imageCredit: "Vomo Island, Fiji" },
       { timezone: "Indian/Reunion", name: "Réunion, France", image: "", imageCredit: "" },
       { timezone: "Asia/Jerusalem", name: "Jerusalem, Israel", image: "", imageCredit: "" },
       { timezone: "America/Guyana", name: "Guyana", image: "", imageCredit: "" },
