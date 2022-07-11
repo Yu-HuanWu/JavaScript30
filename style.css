@@ -1,5 +1,9 @@
 html {
-    background-color: black;
+    background-color: rgb(33, 33, 33);
     background-size: cover;
     color:rgb(165, 200, 233);
+}
+
+li {
+    font-size: 2rem;
 }

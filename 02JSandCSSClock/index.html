@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>It's 5 O'Clock Somewhere</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+  </head>
+  <body>
+    <background>
+      <div class="title">
+        <h1>It is 5 O'Clock in</h1>
+        <h1 class="location"></h1>
+      </div>
+      <div class="clock">
+        <div class="clock-face">
+          <div class="hand hour-hand"></div>
+          <div class="hand min-hand"></div>
+          <div class="hand second-hand"></div>
+        </div>
+      </div>
+      <div class="localtimebg">
+        <div class="localtime"></div>
+      </div>
+      <div class="credit"></div>
+    </background>
+
+
+    <style>
+      html {
+        background: #070707;
+        background-size: cover;
+        font-family: 'helvetica neue';
+        text-align: center;
+        font-size: 10px;
+      }
+
+      body {
+        margin: 0;
+        font-size: 2rem;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-height: 100vh;
+        align-items: center;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      background {
+        backdrop-filter: blur(0.5px);
+        margin: 0;
+        font-size: 2rem;
+        min-height: 100vh;
+        min-width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .title {
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.234);
+        box-shadow: 0 0 50px 50px rgba(0, 0, 0, 0.234);
+      }
+
+      .clock {
+        width: 30rem;
+        height: 30rem;
+        border: 20px solid white;
+        border-radius: 50%;
+        background-color: #00000039;
+        margin: 20px auto;
+        position: relative;
+        padding: 2rem;
+        box-shadow:
+          0 0 0 9px rgba(0,0,0,0.5),
+          inset 0 0 0 3px #EFEFEF,
+          inset 0 0 10px black,
+          0 0 10px rgba(0,0,0,0.3);
+      }
+
+      .clock-face {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform: translateY(-3px); /* account for the height of the clock hands */
+      }
+
+      .hand {
+        width: 50%;
+        height: 6px;
+        background: black;
+        position: absolute;
+        top: 50%;
+        transform-origin: 100%;
+        transform: rotate(90deg);
+        transition: all 0.05s;
+        transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+      }
+
+      .hour-hand {
+        width: 35%;
+        right: 50%;
+        background: rgb(255, 255, 255);
+      }
+
+      .min-hand {
+        height: 6px;
+        background: rgb(255, 255, 255);
+      }
+
+      .second-hand {
+        height: 4px;
+        width: 55%;
+        right: 50%;
+        background: #ff6600;
+      }
+
+      .no-transition {
+        transition: none;
+      }
+
+      h1 {
+        font-family: 'Pacifico', sans-serif;
+        color: blue;
+        /* text-shadow: 3px 5px 3px #00000035; */
+        background: linear-gradient(110deg, #8ee3f8 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(110deg, #b4efd4 34%, #85edb9 34%);
+        background-size: 400%;
+        -webkit-text-fill-color:rgba(255, 255, 255, 0);
+        -webkit-background-clip: text;
+        background-clip: text;
+        animation: Gradient 5s ease infinite;
+        -webkit-animation: Gradient 15s ease infinite;
+        -moz-animation: Gradient 5s ease infinite;
+      }
+
+      @keyframes Gradient {
+        0% {
+          background-position: 30% 50%
+        }
+        50% {
+          background-position: 25% 50%
+        }
+        100% {
+          background-position: 30% 50%
+        }
+      }
+
+      @-webkit-keyframes Gradient {
+        0% {
+          background-position: 30% 50%
+        }
+        50% {
+          background-position: 25% 50%
+        }
+        100% {
+          background-position: 30% 50%
+        }
+      }
+
+      .credit {
+        color:rgba(255, 255, 255, 0.8);
+        position: absolute;
+        top: 90%;
+        right: 5%;
+        text-shadow: 1px 1px 2px #0000004b;
+      }
+
+      .localtime {
+        font-family: Arial, Helvetica, sans-serif;
+        color:rgba(253, 253, 253, 0.901);
+        font-weight: bolder;
+        text-shadow: 0px 1px 4px #000000;
+        -webkit-text-stroke: 0.3px rgb(117, 117, 117);
+        margin: 10px;
+      }
+
+      .localtimebg {
+        background-color: rgba(0,0,0, 0.4); 
+        width: 30rem;
+        border-radius: 30px;
+        margin-bottom: 10px;
+      }
+
+      @media screen and (max-width: 820px) {
+        .credit {
+          top: 95%;
+          right: 5%;
+        }
+
+        .localtime {
+          font-size: 2.5rem;
+          margin: 20px;
+        }
+
+        .localtimebg {
+          width: 80%;
+          margin-bottom: 70px;
+        }
+      }
+    </style>
+
+    <script>
+      const secondHand = document.querySelector('.second-hand');
+      const minsHand = document.querySelector('.min-hand');
+      const hourHand = document.querySelector('.hour-hand');
+      const TimeZones = [
+        { timezone: "Asia/Tokyo", name: "Tokyo, Japan", image: "backgrounds/tokyo.jpg", imageCredit: "RBeil" },
+        { timezone: "Asia/Seoul", name: "Seoul, South Korea", image: "backgrounds/seoul.jpg", imageCredit: "Didier Marti" },
+        { timezone: "America/New_York", name: "New York, USA", image: "backgrounds/newyork.jpg", imageCredit: "Marco Bottigelli" },
+        { timezone: "America/Sao_Paulo", name: "São Paulo, Brazil", image: "backgrounds/saopaulo.jpg", imageCredit: "wsfurlan" },
+        { timezone: "Africa/Cairo", name: "Cairo, Egypt", image: "backgrounds/cairo.jpg", imageCredit: "Anton Aleksenko" },
+        { timezone: "America/Los_Angeles", name: "Los Angeles, USA", image: "backgrounds/losangeles.jpg", imageCredit: "Stoycho Stoychev" },
+        { timezone: "Asia/Bangkok", name: "Chiang Mai, Thailand", image: "backgrounds/chiangmai.jpg", imageCredit: "RBeil" },
+        { timezone: "Europe/Istanbul", name: "Istanbul, Turkey", image: "backgrounds/istanbul.jpg", imageCredit: "Jennifer Richwood" },
+        { timezone: "Europe/Paris", name: "Paris, France", image: "backgrounds/paris.jpeg", imageCredit: "Harald Nachtmann" },
+        { timezone: "Europe/London", name: "London, England", image: "backgrounds/london.jpg", imageCredit: "Tono Balaguer" },
+        { timezone: "America/Chicago", name: "Chicago, USA", image: "backgrounds/chicago.jpg", imageCredit: "RBeil" },
+        { timezone: "America/Bogota", name: "Bogotá, Colombia", image: "backgrounds/bogota.jpg", imageCredit: "Mehdi33300" },
+        { timezone: "Asia/Ho_Chi_Minh", name: "Ho Chi Minh City, Vietnam", image: "backgrounds/hochiminh.jpg", imageCredit: "Hit1912" },
+        { timezone: "Asia/Taipei", name: "Taipei, Taiwan", image: "backgrounds/taipei.jpg", imageCredit: "Wasin Pummarin" },
+        { timezone: "Asia/Hong_Kong", name: "Hong Kong", image: "backgrounds/hongkong.jpg", imageCredit: "Christian Müller" },
+        { timezone: "America/Toronto", name: "Toronto, Canada", image: "backgrounds/toronto.jpg", imageCredit: "Arild Vågen" },
+        { timezone: "Asia/Singapore", name: "Singapore", image: "backgrounds/singapore.jpg", imageCredit: "Roslan Rahman" },
+        { timezone: "Africa/Nairobi", name: "Nairobi, Kenya", image: "backgrounds/nairobi.jpg", imageCredit: "ChandraDhas" },
+        { timezone: "Africa/Accra", name: "Accra, Ghana", image: "backgrounds/accra.jpg", imageCredit: "Felix Lipov" },
+        { timezone: "Australia/Sydney", name: "Sydney, Australia", image: "backgrounds/sydney.jpg", imageCredit: "Steve Heap" },
+        { timezone: "Europe/Rome", name: "Rome, Italy", image: "backgrounds/rome.jpg", imageCredit: "Julius Silver" },
+        { timezone: "Australia/Melbourne", name: "Port Campbell, Australia", image: "backgrounds/portcampbell.jpg", imageCredit: "Josselin Berger" },
+        { timezone: "Europe/Athens", name: "Athens, Greece", image: "backgrounds/athens.jpg", imageCredit: "Anastasija Jarmolowicz" },
+        { timezone: "Europe/Kiev", name: "Kyiv, Ukraine", image: "backgrounds/kyiv.jpg", imageCredit: "Hugh Mitton" },
+        { timezone: "Asia/Pyongyang", name: "Pyongyang, North Korea", image: "backgrounds/pyongyang.jpg", imageCredit: "Clay Gilliland" },
+        { timezone: "Europe/Lisbon", name: "Lisbon, Portugal", image: "backgrounds/lisbon.jpg", imageCredit: "Olga Gavrilova" },
+        { timezone: "Asia/Baku", name: "Baku, Azerbaijan", image: "backgrounds/baku.jpg", imageCredit: "David Sucsy" },
+        { timezone: "America/Puerto_Rico", name: "Puerto Rico", image: "backgrounds/puertorico.jpg", imageCredit: "Martin Wheeler" },
+        { timezone: "America/Vancouver", name: "Vancouver, Canada", image: "backgrounds/vancouver.jpg", imageCredit: "Aolin Chen" },
+        { timezone: "America/Havana", name: "Havana, Cuba", image: "backgrounds/havana.jpg", imageCredit: "possohh" },
+        { timezone: "Africa/Tunis", name: "Tunis, Tunisia", image: "backgrounds/tunis.jpg", imageCredit: "Romasph" },
+        { timezone: "America/Belem", name: "Belém, Brazil", image: "backgrounds/belem.jpeg", imageCredit: "Filipe Frazao" },
+        { timezone: "America/Tijuana", name: "Tijuana, Mexico", image: "backgrounds/tijuana.jpg", imageCredit: "Lizzy Myers" },
+        { timezone: "Australia/Perth", name: "Perth, Australia", image: "backgrounds/perth.jpg", imageCredit: "2WinG2" },
+        { timezone: "Europe/Amsterdam", name: "Amsterdam, Netherlands", image: "backgrounds/amsterdam.jpg", imageCredit: "Yasonya Microstocker" },
+        { timezone: "Asia/Almaty", name: "Almaty, Kazakhstan", image: "backgrounds/almaty.jpg", imageCredit: "Aureliy Movila" },
+        { timezone: "Pacific/Auckland", name: "Auckland, New Zealand", image: "backgrounds/auckland.jpg", imageCredit: "Emanuel Metzenthin" },
+        { timezone: "Europe/Prague", name: "Prague, Czech Republic", image: "backgrounds/prague.jpg", imageCredit: "Foxys Forest Manufacture" },
+        { timezone: "America/Guatemala", name: "Guatemala", image: "backgrounds/guatemala.jpg", imageCredit: "Sébastien Lecocq" },
+        { timezone: "Asia/Yerevan", name: "Yerevan, Armenia", image: "backgrounds/yerevan.jpg", imageCredit: "Mehmet Ozbalci" },
+        { timezone: "Asia/Ulaanbaatar", name: "Ulaanbaatar, Mongolia", image: "backgrounds/ulaanbaatar.jpg", imageCredit: "Stetiukha Kristina" },
+        { timezone: "America/Costa_Rica", name: "Costa Rica", image: "backgrounds/costarica.jpg", imageCredit: "Nicholas Courtney" },
+        { timezone: "Asia/Tbilisi", name: "Tbilisi, Georgia", image: "backgrounds/tbilisi.jpeg", imageCredit: "Victoria Vitkovska" },
+        { timezone: "America/Jamaica", name: "Jamaica", image: "backgrounds/jamaica.jpg", imageCredit: "Konstantin Kulikov" },
+        { timezone: "Pacific/Fiji", name: "Fiji", image: "backgrounds/fiji.jpg", imageCredit: "Vomo Island, Fiji" },
+        { timezone: "Indian/Reunion", name: "Réunion, France", image: "backgrounds/reunion.jpg", imageCredit: "Anthony O'Connell" },
+        { timezone: "Asia/Jerusalem", name: "Jerusalem, Israel", image: "backgrounds/jerusalem.jpg", imageCredit: "Alexey Golubev" },
+        { timezone: "America/Guyana", name: "Guyana", image: "backgrounds/guyana.jpg", imageCredit: "Jamie Lafferty" },
+        { timezone: "America/Winnipeg", name: "Winnipeg, Canada", image: "backgrounds/winnipeg.jpg", imageCredit: "Ken Gillespie" },
+        { timezone: "Europe/Riga", name: "Riga, Latvia", image: "backgrounds/riga.jpg", imageCredit: "Starcevic" },
+        { timezone: "America/Cancun", name: "Playa del Carmen, Mexico", image: "backgrounds/playadelcarmen.jpeg", imageCredit: "Ivan Soto Cobos" },
+        { timezone: "Asia/Sakhalin", name: "Sakhalin, Russia", image: "backgrounds/sakhalin.jpg", imageCredit: "Piadyk Aleksei" },
+        { timezone: "Atlantic/Cape_Verde", name: "Cape Verde", image: "backgrounds/capeverde.jpg", imageCredit: "Neale and Judith Clark" },
+        { timezone: "Asia/Ashgabat", name: "Ashgabat, Turkmenistan", image: "backgrounds/ashgabat.jpg", imageCredit: "Arnau Rovira Vidal" },
+        { timezone: "America/Halifax", name: "Halifax, Canada", image: "backgrounds/halifax.jpg", imageCredit: "David Maginley" },
+        { timezone: "Africa/Bissau", name: "Bijagós Islands, Guinea-Bissau", image: "backgrounds/bijagos.jpg", imageCredit: "Damian Pankowiec" },
+        { timezone: "Pacific/Honolulu", name: "Honolulu, USA", image: "backgrounds/honolulu.jpg", imageCredit: "Lauren Proctor" },
+        { timezone: "Indian/Maldives", name: "Maldives", image: "backgrounds/maldives.jpg", imageCredit: "Sakis Papadopoulos" },
+        { timezone: "America/Anchorage", name: "Anchorage, USA", image: "backgrounds/anchorage.jpg", imageCredit: "Jody Overstreet" },
+        { timezone: "America/Barbados", name: "Barbados", image: "backgrounds/barbados.jpg", imageCredit: "Tryphosa Ho" },
+        { timezone: "Asia/Yakutsk", name: "Yakutsk, Russia", image: "backgrounds/yakutsk.jpg", imageCredit: "Amos Chapple" },
+        { timezone: "Asia/Aqtobe", name: "Aktolagay Plateau, Kazakhstan", image: "backgrounds/aktolagay.jpg", imageCredit: "Aleksandr Manzhosov" },
+        { timezone: "Atlantic/Madeira", name: "Madeira, Portugal", image: "backgrounds/madeira.jpg", imageCredit: "Petr Pohudka" },
+        { timezone: "Atlantic/Azores", name: "Azores, Portugal", image: "backgrounds/azores.jpg", imageCredit: "Vicky SP" },
+        { timezone: "America/Boise", name: "Boise, USA", image: "backgrounds/boise.jpg", imageCredit: "Charles Knowles" },
+        { timezone: "Asia/Kamchatka", name: "Kamchatka, Russia", image: "backgrounds/kamchatka.jpg", imageCredit: "Daniel Kordan" },
+        { timezone: "Pacific/Tahiti", name: "Tahiti, French Polynesia", image: "backgrounds/tahiti.jpg", imageCredit: "Martin Valigursky" },
+        { timezone: "Pacific/Guam", name: "Guam", image: "backgrounds/guam.jpg", imageCredit: "Janelle Orth" },
+        { timezone: "America/Araguaina", name: "Araguaína, Brazil", image: "backgrounds/araguaina.jpg", imageCredit: "JuarezBrito" },
+        { timezone: "Asia/Kuching", name: "Kuching, Malaysia", image: "backgrounds/kuching.jpg", imageCredit: "Sharkawi Che Din" },
+        { timezone: "Atlantic/Reykjavik", name: "Reykjavík, Iceland", image: "backgrounds/reykjavik.jpg", imageCredit: "ansonmiao" },
+        { timezone: "Asia/Magadan", name: "Magadan, Russia", image: "backgrounds/magadan.jpg", imageCredit: "Andrey Gerasimenko" },
+        { timezone: "Asia/Hovd", name: "Khovd, Mongolia", image: "backgrounds/khovd.jpg", imageCredit: "Bernd Thaller" },
+        { timezone: "Europe/Andorra", name: "Andorra", image: "backgrounds/andorra.jpg", imageCredit: "Pavel Dudek" },
+        { timezone: "Asia/Thimphu", name: "Thimphu, Bhutan", image: "backgrounds/thimphu.jpg", imageCredit: "Priyangshu Sv" },
+        { timezone: "Indian/Mahe", name: "Mahé, Seychelles", image: "backgrounds/mahe.jpg", imageCredit: "Stefan Nimmesgern" },
+        { timezone: "Pacific/Tongatapu", name: "Tongatapu, Tonga", image: "backgrounds/tongatapu.jpg", imageCredit: "geographic.media" },
+        { timezone: "Pacific/Efate", name: "Efate, Vanuatu", image: "backgrounds/efate.jpg", imageCredit: "Bethel Fath" },
+        { timezone: "Atlantic/Bermuda", name: "Bermuda", image: "backgrounds/bermuda.jpg", imageCredit: "Melanie Hobson" },
+        { timezone: "America/Belize", name: "Belize", image: "backgrounds/belize.jpg", imageCredit: "Aleksandar Todorovic" },
+        { timezone: "Atlantic/Faroe", name: "Faroe Islands", image: "backgrounds/faroe.jpg", imageCredit: "Alexander Erdbeer" },
+        { timezone: "Pacific/Chuuk", name: "Chuuk, Micronesia", image: "backgrounds/chuuk.jpg", imageCredit: "u/vizzue" },
+        { timezone: "Pacific/Apia", name: "Apia, Samoa", image: "backgrounds/apia.jpg", imageCredit: "Carmen Gabriela Filip" },
+        { timezone: "Pacific/Pohnpei", name: "Pohnpei, Micronesia", image: "backgrounds/pohnpei.jpg", imageCredit: "Matthew Wingate" },
+        { timezone: "America/Juneau", name: "Juneau, USA", image: "backgrounds/juneau.jpg", imageCredit: "Bernard Spragg" },
+        { timezone: "Europe/Gibraltar", name: "Gibraltar", image: "backgrounds/gibraltar.jpg", imageCredit: "Halina Jasińska" },
+        { timezone: "Pacific/Majuro", name: "Majuro, Marshall Islands", image: "backgrounds/majuro.jpg", imageCredit: "Michael Runkel" },
+        { timezone: "Pacific/Galapagos", name: "Galápagos Islands, Ecuador", image: "backgrounds/galapagos.jpg", imageCredit: "Alexander/Fotolia" },
+        { timezone: "America/Whitehorse", name: "Whitehorse, Canada", image: "backgrounds/whitehorse.jpg", imageCredit: "Paul Nicklen" },
+        { timezone: "Pacific/Palau", name: "Palau", image: "backgrounds/palau.jpg", imageCredit: "Jesse Alpert" },
+        { timezone: "America/Yellowknife", name: "Yellowknife, Canada", image: "backgrounds/yellowknife.jpg", imageCredit: "Ken Phung" },
+        { timezone: "America/Nuuk", name: "Nuuk, Greenland", image: "backgrounds/nuuk.jpg", imageCredit: "Christophe Stramba-Badiali" },
+        { timezone: "Pacific/Rarotonga", name: "Aitutaki, Cook Islands", image: "backgrounds/aitutaki.jpg", imageCredit: "Andrea Izzotti" },
+        { timezone: "Asia/Anadyr", name: "Anadyr, Russia", image: "backgrounds/anadyr.jpg", imageCredit: "Константин Шевцов" },
+        { timezone: "America/Dawson_Creek", name: "Dawson Creek, Canada", image: "backgrounds/dawsoncreek.jpg", imageCredit: "Maclean25" },
+        { timezone: "America/Adak", name: "Adak, USA", image: "backgrounds/adak.jpg", imageCredit: "Ben Huff" },
+        { timezone: "Pacific/Gambier", name: "Gambier Islands, French Polynesia", image: "backgrounds/gambierislands.jpg", imageCredit: "Tahiti Tourisme" },
+        { timezone: "America/Noronha", name: "Fernando de Noronha, Brazil", image: "backgrounds/noronha.jpg", imageCredit: "Nido Huebl" },
+        { timezone: "Pacific/Pitcairn", name: "Adamstown, Pitcairn Islands", image: "backgrounds/pitcairn.jpg", imageCredit: "Makemake" },
+      ];
+
+      let fiveOClockLocations = [];
+      let locations = {}
+      TimeZones.forEach((e)=>{
+        let time = new Date().toLocaleString('en-GB', { timeZone: e.timezone })
+        let hour = time.substring(12, 14)
+
+        if (locations[hour]) {
+          locations[hour].push(e)
+        } else {
+          locations[hour] = [e]
+        }
+
+        if (time.substring(12,14) === '17') {
+          console.log(e)
+          fiveOClockLocations.push(e)
+        }
+      })
+
+      const chosenLocation = fiveOClockLocations[Math.floor(Math.random() * fiveOClockLocations.length)]
+      document.querySelector('.location').innerHTML = chosenLocation.name
+      document.body.background = chosenLocation.image === "" ? "backgrounds/beerfrog.jpeg" : chosenLocation.image;
+      document.querySelector('.credit').innerHTML = chosenLocation.imageCredit === "" ? "idk" : `Photo by ${chosenLocation.imageCredit}`;
+      console.log(locations)
+      function setDate() {
+        const now = new Date();
+
+        const seconds = now.getSeconds();
+        const secondsDegrees = ((seconds / 60) * 360) + 90;
+        if (secondsDegrees === 90) {
+          secondHand.classList.add('no-transition');
+        } else {
+          secondHand.classList.remove('no-transition');
+        }
+        secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+
+        const mins = now.getMinutes();
+        const minsDegrees = ((mins / 60) * 360) + ((seconds / 60) * 6) + 90;
+        minsHand.style.transform = `rotate(${minsDegrees}deg)`;
+
+        const hour = 17
+        const hourDegrees = ((hour / 12) * 360) + ((mins / 60) * 30) + 90;
+        hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+
+        if (now.getHours() !== 17) {
+          document.querySelector('.localtime').innerHTML = `but for you, it is still ${now.toLocaleString('en-US')} 😭`
+        } else {
+          document.querySelector('.localtime').innerHTML = "🍺 and for YOU as well! 🍺"
+        }
+      }
+
+      setInterval(setDate, 1000);
+
+      setDate();
+
+    </script>
+  </body>
+</html>
