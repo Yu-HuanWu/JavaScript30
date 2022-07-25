@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>🪐 Planetary Scale ⚖️</title>
     <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
 
   <body>
@@ -27,7 +28,7 @@
       }
 
       .panels {
-        min-height: 100vh;
+        min-height: 90vh;
         overflow: hidden;
         display: flex;
       }
@@ -161,7 +162,17 @@
         font-size: 2em
       }
 
-      @media only screen and (max-width: 600px) {
+      @media screen and (max-width: 600px) {
+        .panels {
+          flex-direction: column;
+          min-width: 100vw;
+        }
+
+        .panel {
+          overflow: hidden;
+          font-size: 10px;
+        }
+
         .panel p {
           font-size: 0.8em;
         }
