@@ -23,6 +23,14 @@ const elementEndpoint = 'https://raw.githubusercontent.com/Bowserinator/Periodic
     .then(blob => blob.json())
     .then(data => elements.push(...data.elements));
 
+  function findMatches(wordToMatch, elements) {
+    return elements.filter(element => {
+      // here we need to figure out if the element name or atomic mass matches what was searched
+      const regex = new RegExp(wordToMatch, 'gi');
+      return element.name.match(regex) || element.atomic_mass.match(regex)
+    });
+  }
+
 </script>
 </body>
 </html>
