@@ -1,6 +1,6 @@
 html {
   box-sizing: border-box;
-  background: #ffc600;
+  background: #6caeff;
   font-family: 'helvetica neue';
   font-size: 20px;
   font-weight: 200;
@@ -8,6 +8,11 @@ html {
 
 *, *:before, *:after {
   box-sizing: inherit;
+}
+
+h1 {
+  text-align: center;
+  color:rgb(64, 63, 63)
 }
 
 input {
@@ -39,7 +44,6 @@ input.search {
   margin: 0;
   padding: 0;
   position: relative;
-  /*perspective: 20px;*/
 }
 
 .suggestions li {
