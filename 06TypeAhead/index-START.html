@@ -15,7 +15,7 @@
     </ul>
   </form>
 <script>
-const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+// const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 const elementEndpoint = 'https://raw.githubusercontent.com/Bowserinator/Periodic-Table-JSON/master/PeriodicTableJSON.json';
 
   const elements = [];
@@ -27,7 +27,8 @@ const elementEndpoint = 'https://raw.githubusercontent.com/Bowserinator/Periodic
     return elements.filter(element => {
       // here we need to figure out if the element name or atomic mass matches what was searched
       const regex = new RegExp(wordToMatch, 'gi');
-      return element.name.match(regex) || element.atomic_mass.match(regex)
+      return element.name.match(regex)
+      //  || element.atomic_mass.match(regex)
     });
   }
 
@@ -40,16 +41,23 @@ const elementEndpoint = 'https://raw.githubusercontent.com/Bowserinator/Periodic
     const html = matchArray.map(element => {
       const regex = new RegExp(this.value, 'gi');
       const elementName = element.name.replace(regex, `<span class="hl">${this.value}</span>`);
-      const elementAtomicMass = element.atomic_mass.replace(regex, `<span class="hl">${this.value}</span>`);
+      // const elementAtomicMass = element.atomic_mass.replace(regex, `<span class="hl">${this.value}</span>`);
       return `
     <li>
-      <span class="name">${elementName}, atomic mass: ${elementAtomicMass}</span>
+      <span class="name">${elementName}, atomic mass: ${element.atomic_mass}</span>
       <span class="population">${numberWithCommas(element.number)}</span>
     </li>
   `;
     }).join('');
+    console.log(html)
     suggestions.innerHTML = html;
   }
+
+  const searchInput = document.querySelector('.search');
+  const suggestions = document.querySelector('.suggestions');
+
+  searchInput.addEventListener('change', displayMatches);
+  searchInput.addEventListener('keyup', displayMatches);
 
 </script>
 </body>
