@@ -35,6 +35,22 @@ const elementEndpoint = 'https://raw.githubusercontent.com/Bowserinator/Periodic
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
+  function displayMatches() {
+    const matchArray = findMatches(this.value, elements);
+    const html = matchArray.map(element => {
+      const regex = new RegExp(this.value, 'gi');
+      const elementName = element.name.replace(regex, `<span class="hl">${this.value}</span>`);
+      const elementAtomicMass = element.atomic_mass.replace(regex, `<span class="hl">${this.value}</span>`);
+      return `
+    <li>
+      <span class="name">${elementName}, atomic mass: ${elementAtomicMass}</span>
+      <span class="population">${numberWithCommas(element.number)}</span>
+    </li>
+  `;
+    }).join('');
+    suggestions.innerHTML = html;
+  }
+
 </script>
 </body>
 </html>
