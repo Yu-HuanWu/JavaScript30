@@ -12,7 +12,8 @@ html {
 
 h1 {
   text-align: center;
-  color:rgb(64, 63, 63)
+  color:rgb(64, 63, 63);
+  font-weight: 300;
 }
 
 input {
@@ -69,7 +70,7 @@ input.search {
   background: linear-gradient(to top,  #ffffff 0%,#EFEFEF 100%);
 }
 
-span.population {
+span.protons {
   font-size: 15px;
 }
 

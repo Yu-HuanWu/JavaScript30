@@ -11,7 +11,11 @@
     <input type="text" class="search" placeholder="Element names or atomic number">
     <ul class="suggestions">
       <li>Filter for an element</li>
-      <li>or a mass</li>
+      <li>by its mass</li>
+      <li>or atomic number</li>
+      <li>or symbol</li>
+      <li>or electron configuration</li>
+      <li>and more!</li>
     </ul>
   </form>
 <script>
@@ -28,7 +32,9 @@ const elementEndpoint = 'https://raw.githubusercontent.com/Bowserinator/Periodic
       // here we need to figure out if the element name or atomic mass matches what was searched
       const regex = new RegExp(wordToMatch, 'gi');
       return element.name.match(regex)
-      //  || element.atomic_mass.match(regex)
+       || element.atomic_mass.toString().match(regex)
+       || element.number.toString().match(regex)
+       || element.symbol.match(regex)
     });
   }
 
@@ -40,12 +46,14 @@ const elementEndpoint = 'https://raw.githubusercontent.com/Bowserinator/Periodic
     const matchArray = findMatches(this.value, elements);
     const html = matchArray.map(element => {
       const regex = new RegExp(this.value, 'gi');
+      const elementSymbol = element.symbol.replace(regex, `<span class="hl">${this.value}</span>`);
       const elementName = element.name.replace(regex, `<span class="hl">${this.value}</span>`);
-      // const elementAtomicMass = element.atomic_mass.replace(regex, `<span class="hl">${this.value}</span>`);
+      const elementAtomicMass = element.atomic_mass.toString().replace(regex, `<span class="hl">${this.value}</span>`);
+      const elementNumber = element.number.toString().replace(regex, `<span class="hl">${this.value}</span>`);
       return `
     <li>
-      <span class="name">${elementName}, atomic mass: ${element.atomic_mass}</span>
-      <span class="population">${numberWithCommas(element.number)}</span>
+      <span class="name">${elementSymbol} | ${elementName} | atomic mass: ${elementAtomicMass}</span>
+      <span class="protons">${numberWithCommas(elementNumber)}</span>
     </li>
   `;
     }).join('');
