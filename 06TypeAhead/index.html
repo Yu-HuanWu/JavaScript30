@@ -32,9 +32,10 @@ const elementEndpoint = 'https://raw.githubusercontent.com/Bowserinator/Periodic
       // here we need to figure out if the element name or atomic mass matches what was searched
       const regex = new RegExp(wordToMatch, 'gi');
       return element.name.match(regex)
-       || element.atomic_mass.toString().match(regex)
-       || element.number.toString().match(regex)
-       || element.symbol.match(regex)
+        || element.atomic_mass.toString().match(regex)
+        || element.number.toString().match(regex)
+        || element.symbol.match(regex)
+        || element.electron_configuration.match(regex)
     });
   }
 
@@ -52,12 +53,18 @@ const elementEndpoint = 'https://raw.githubusercontent.com/Bowserinator/Periodic
       const elementNumber = element.number.toString().replace(regex, `<span class="hl">${this.value}</span>`);
       return `
     <li>
-      <span class="name">${elementSymbol} | ${elementName} | atomic mass: ${elementAtomicMass}</span>
-      <span class="protons">${numberWithCommas(elementNumber)}</span>
+      <span class="name">
+        <span>
+          ${elementSymbol} | ${elementName} | atomic mass: ${elementAtomicMass}
+        </span>
+        <span>
+          ${element.electron_configuration}
+        </span>
+      </span>
+      <span class="protons">${elementNumber}</span>
     </li>
   `;
     }).join('');
-    console.log(html)
     suggestions.innerHTML = html;
   }
 
