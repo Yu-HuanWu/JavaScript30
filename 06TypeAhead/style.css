@@ -66,7 +66,7 @@ input.search {
 }
 
 .suggestions li:nth-child(odd) {
-  transform: perspective(100px) rotateX(-3deg) translateY(3px);
+  transform: perspective(100px) rotateX(-3deg) translateY(4px);
   background: linear-gradient(to top,  #ffffff 0%,#EFEFEF 100%);
 }
 
@@ -81,6 +81,11 @@ span.name {
 
 span.symbol {
   font-weight: 400;
+}
+
+span.ec {
+  font-size: 15px;
+  font-weight: 100;
 }
 
 .hl {
