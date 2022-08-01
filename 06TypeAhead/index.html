@@ -52,18 +52,18 @@ const elementEndpoint = 'https://raw.githubusercontent.com/Bowserinator/Periodic
       const elementAtomicMass = element.atomic_mass.toString().replace(regex, `<span class="hl">${this.value}</span>`);
       const elementNumber = element.number.toString().replace(regex, `<span class="hl">${this.value}</span>`);
       return `
-    <li>
-      <span class="name">
-        <span>
-          ${elementSymbol} | ${elementName} | atomic mass: ${elementAtomicMass}
-        </span>
-        <span>
-          ${element.electron_configuration}
-        </span>
-      </span>
-      <span class="protons">${elementNumber}</span>
-    </li>
-  `;
+        <li>
+          <span class="name">
+            <span>
+              <span class="symbol">${elementSymbol}</span> | ${elementName} | atomic mass: ${elementAtomicMass}
+            </span>
+            <span>
+              ${element.electron_configuration}
+            </span>
+          </span>
+          <span class="protons">${elementNumber}</span>
+        </li>
+      `;
     }).join('');
     suggestions.innerHTML = html;
   }

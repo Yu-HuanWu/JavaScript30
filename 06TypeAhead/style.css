@@ -79,6 +79,10 @@ span.name {
   flex-direction: column;
 }
 
+span.symbol {
+  font-weight: 400;
+}
+
 .hl {
   background: #ffc600;
 }
