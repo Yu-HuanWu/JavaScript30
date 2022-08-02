@@ -51,6 +51,7 @@ const elementEndpoint = 'https://raw.githubusercontent.com/Bowserinator/Periodic
       const elementName = element.name.replace(regex, `<span class="hl">${this.value}</span>`);
       const elementAtomicMass = element.atomic_mass.toString().replace(regex, `<span class="hl">${this.value}</span>`);
       const elementNumber = element.number.toString().replace(regex, `<span class="hl">${this.value}</span>`);
+      const elementEC = element.electron_configuration.toString().replace(regex, `<span class="hl">${this.value}</span>`);
       return `
         <li>
           <span class="name">
@@ -59,7 +60,7 @@ const elementEndpoint = 'https://raw.githubusercontent.com/Bowserinator/Periodic
             </span>
             <span class="ec"> Electron Configuration: </span>
             <span>
-              ${element.electron_configuration}
+              ${elementEC}
             </span>
           </span>
           <span class="protons">${elementNumber}</span>
