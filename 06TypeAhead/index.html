@@ -15,6 +15,7 @@
       <li>or atomic number</li>
       <li>or symbol</li>
       <li>or electron configuration</li>
+      <li>or family name (e.g. noble gas)</li>
       <li>and more!</li>
     </ul>
   </form>
@@ -36,6 +37,7 @@ const elementEndpoint = 'https://raw.githubusercontent.com/Bowserinator/Periodic
         || element.number.toString().match(regex)
         || element.symbol.match(regex)
         || element.electron_configuration.match(regex)
+        || element.category.match(regex)
     });
   }
 
