@@ -28,6 +28,7 @@
         ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
         ctx.beginPath();
         ctx.moveTo(lastX, lastY);
+        ctx.lineTo(e.offsetX, e.offsetY);
       }
     </script>
 
