@@ -52,6 +52,7 @@
       });
 
       canvas.addEventListener('mousemove', draw);
+      canvas.addEventListener('mouseup', () => isDrawing = false);
     </script>
 
     <style>
