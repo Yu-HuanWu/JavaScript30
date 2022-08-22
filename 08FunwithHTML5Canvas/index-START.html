@@ -3,15 +3,14 @@
   <head>
     <meta charset="UTF-8">
     <title>HTML5 Canvas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
     <h1>Draw Here</h1>
-    <canvas id="draw" width="800" height="800"></canvas>
+    <canvas id="draw" width="1100" height="600"></canvas>
     <script>
       const canvas = document.querySelector('#draw');
       const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
       ctx.strokeStyle = '#BADA55';
       ctx.lineJoin = 'round';
       ctx.lineCap = 'round';
@@ -57,13 +56,26 @@
     </script>
 
     <style>
-      html, body {
+      html {
         margin: 0;
       }
       
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background-color: gray;
+      }
+
       h1 {
         display: flex;
         justify-content: center;
+      }
+
+      canvas {
+        border-style: outset;
+        background-color: whitesmoke;
       }
     </style>
 
