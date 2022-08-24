@@ -30,11 +30,21 @@
         ctx.lineTo(e.offsetX, e.offsetY);
         ctx.stroke();
         [lastX, lastY] = [e.offsetX, e.offsetY];
+        console.log(lastX, lastY)
 
         hue++;
-        if (hue >= 360) {
-          hue = 0;
+        if (lastX > (1100/2)) {
+          if (hue >= 360 || hue <= (360/2)) {
+            hue = (360/2);
+          }
+        } else {
+          if (hue >= (360/2)) {
+            hue = 0;
+          }
         }
+        // if (hue >= 360) {
+        //   hue = 0;
+        // }
         if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
           direction = !direction;
         }
