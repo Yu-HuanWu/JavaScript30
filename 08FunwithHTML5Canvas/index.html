@@ -6,15 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
-    <h1>Draw Here</h1>
-    <canvas id="draw" width="1100" height="600"></canvas>
+    <h1 id="title">Draw Here</h1>
+    <canvas id="draw"></canvas>
     <script>
       const canvas = document.querySelector('#draw');
+      canvas.width = window.screen.width - (window.screen.width*0.1);
+      canvas.height = window.screen.width < 820 ? window.screen.height - (window.screen.height*0.2) : window.screen.height - (window.screen.height * 0.25);
+
       const ctx = canvas.getContext('2d');
       ctx.strokeStyle = '#BADA55';
       ctx.lineJoin = 'round';
       ctx.lineCap = 'round';
-      ctx.lineWidth = 100;
+      ctx.lineWidth = 10;
 
       let isDrawing = false;
       let lastX = 0;
@@ -23,6 +26,7 @@
       let direction = true;
 
       function draw(e) {
+        e.preventDefault();
         if (!isDrawing) return; 
         ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
         ctx.beginPath();
@@ -32,7 +36,7 @@
         [lastX, lastY] = [e.offsetX, e.offsetY];
 
         hue++;
-        if (lastX > (1100/2)) {
+        if (lastX > (canvas.width/2)) {
           if (hue >= 360 || hue <= (360/2)) {
             hue = Math.floor(360- Math.random()*181)
           }
@@ -54,15 +58,19 @@
         }
       }
 
-      canvas.addEventListener(('mousedown'|| 'touchstart'), (e) => {
+      canvas.addEventListener(('pointerdown'), (e) => {
         isDrawing = true;
+        // console.log(e)
         [lastX, lastY] = [e.offsetX, e.offsetY];
       });
 
-      canvas.addEventListener(('mousemove'|| 'touchmove'), draw);
-      canvas.addEventListener('mouseup', () => isDrawing = false);
-      canvas.addEventListener('touchend', () => isDrawing = false);
-      canvas.addEventListener('mouseout', () => isDrawing = false);
+      canvas.addEventListener('pointermove', (e)=> {
+        e.preventDefault();
+        draw(e)
+      });
+      canvas.addEventListener('pointerup', () => isDrawing = false);
+      // canvas.addEventListener('touchend', () => isDrawing = false);
+      canvas.addEventListener('pointerout', () => isDrawing = false);
     </script>
 
     <style>
