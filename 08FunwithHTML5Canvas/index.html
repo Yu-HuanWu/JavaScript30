@@ -26,7 +26,6 @@
       let direction = true;
 
       function draw(e) {
-        e.preventDefault();
         if (!isDrawing) return; 
         ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
         ctx.beginPath();
@@ -60,17 +59,22 @@
 
       canvas.addEventListener(('pointerdown'), (e) => {
         isDrawing = true;
-        // console.log(e)
         [lastX, lastY] = [e.offsetX, e.offsetY];
       });
 
       canvas.addEventListener('pointermove', (e)=> {
-        e.preventDefault();
         draw(e)
       });
-      canvas.addEventListener('pointerup', () => isDrawing = false);
-      // canvas.addEventListener('touchend', () => isDrawing = false);
-      canvas.addEventListener('pointerout', () => isDrawing = false);
+      canvas.addEventListener('pointerup', () => {
+        isDrawing = false
+      });
+      canvas.addEventListener('pointerout', () => {
+        isDrawing = false
+      });
+      canvas.addEventListener("touchstart", function (event) { event.preventDefault() })
+      canvas.addEventListener("touchmove", function (event) { event.preventDefault() })
+      canvas.addEventListener("touchend", function (event) { event.preventDefault() })
+      canvas.addEventListener("touchcancel", function (event) { event.preventDefault() })
     </script>
 
     <style>
