@@ -16,7 +16,7 @@
       const ctx = canvas.getContext('2d');
       ctx.strokeStyle = '#BADA55';
       ctx.lineJoin = 'round';
-      ctx.lineCap = 'round';
+      ctx.lineCap = 'square';
       ctx.lineWidth = 10;
 
       let isDrawing = false;
@@ -46,6 +46,7 @@
         } else {
           ctx.lineWidth--;
         }
+        console.log(ctx)
       }
 
       canvas.addEventListener(('pointerdown'), (e) => {
