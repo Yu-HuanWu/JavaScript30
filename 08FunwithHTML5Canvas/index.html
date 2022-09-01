@@ -14,15 +14,18 @@
       canvas.height = window.screen.width < 820 ? window.screen.height - (window.screen.height*0.2) : window.screen.height - (window.screen.height * 0.25);
 
       const ctx = canvas.getContext('2d');
-      ctx.strokeStyle = '#BADA55';
+      ctx.strokeStyle = 'red';
       ctx.lineJoin = 'round';
-      ctx.lineCap = 'square';
+      ctx.lineCap = 'round';
+      ctx.shadowOffsetX = 3;
+      ctx.shadowOffsetY = 3;
+      ctx.shadowBlur = 1;
       ctx.lineWidth = 10;
-
       let isDrawing = false;
       let lastX = 0;
       let lastY = 0;
       let hue = Math.floor(Math.random()*361);
+      ctx.shadowColor = `hsl(${360-hue}, 100%, 50%)`;
       let direction = true;
 
       function draw(e) {
@@ -33,7 +36,7 @@
         ctx.lineTo(e.offsetX, e.offsetY);
         ctx.stroke();
         [lastX, lastY] = [e.offsetX, e.offsetY];
-
+        
         hue++;
         if (hue >= 360) {
           hue = 0;
@@ -46,9 +49,8 @@
         } else {
           ctx.lineWidth--;
         }
-        console.log(ctx)
+        ctx.shadowColor = `hsl(${180-hue < 0 ? 180+hue : 180-hue}, 100%, 50%)`;
       }
-
       canvas.addEventListener(('pointerdown'), (e) => {
         isDrawing = true;
         [lastX, lastY] = [e.offsetX, e.offsetY];
