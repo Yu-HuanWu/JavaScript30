@@ -27,9 +27,17 @@
       let hue = Math.floor(Math.random()*361);
       ctx.shadowColor = `hsl(${360-hue}, 100%, 50%)`;
       let direction = true;
-
+      // for clearing the brush stroke
+      let nIntervalId = 0;
+      
       function draw(e) {
-        if (!isDrawing) return; 
+        if (!isDrawing) {
+          console.log('isDrawing false')
+          if (nIntervalId != null) {
+            clearInterval(nIntervalId); nIntervalId = null;
+          }
+          return
+        }; 
         ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
         ctx.beginPath();
         ctx.moveTo(lastX, lastY);
@@ -50,21 +58,25 @@
           ctx.lineWidth--;
         }
         ctx.shadowColor = `hsl(${180-hue < 0 ? 180+hue : 180-hue}, 100%, 50%)`;
+        
       }
 
       function fadeOut() {
         ctx.fillStyle = "rgba(0,0,0,0.05)";
         ctx.shadowColor = "rgba(0,0,0,0.1)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        console.log('teset')
-        setTimeout(fadeOut, 250);
+        console.log('test', nIntervalId)
+        // setTimeout(fadeOut, 250);
       }
-      
+
       canvas.addEventListener(('pointerdown'), (e) => {
         isDrawing = true;
         [lastX, lastY] = [e.offsetX, e.offsetY];
+        if (!nIntervalId) {
+          nIntervalId = setInterval(fadeOut, 200)
+        }
       });
-
+      
       canvas.addEventListener('pointermove', (e)=> {
         draw(e)
       });
@@ -76,9 +88,8 @@
       });
       canvas.addEventListener("touchstart", function (event) { event.preventDefault() })
       canvas.addEventListener("touchmove", function (event) { event.preventDefault() })
-      canvas.addEventListener("touchend", function (event) { event.preventDefault() })
-      canvas.addEventListener("touchcancel", function (event) { event.preventDefault() })
-      fadeOut();
+      canvas.addEventListener("touchend", function (event) { event.preventDefault(); isDrawing = false})
+      canvas.addEventListener("touchcancel", function (event) { event.preventDefault(); isDrawing = false })
     </script>
 
     <style>
