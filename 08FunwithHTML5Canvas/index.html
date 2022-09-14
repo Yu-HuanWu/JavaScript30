@@ -2,11 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>HTML5 Canvas</title>
+    <title>Buddha Board</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
-    <h3 id="title">Buddha Board</h3>
+    <div id="title">
+      <h3>Buddha Board</h3>
+      <h4>"The root of suffering is attachment"</h4>
+    </div>
     <canvas id="draw"></canvas>
     <script>
       const canvas = document.querySelector('#draw');
@@ -105,9 +108,18 @@
         background-color: rgb(113, 111, 111);
       }
 
-      h3 {
+      #title {
         display: flex;
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
+        margin: 0px;
+        padding: 0;
+        color: rgb(223, 217, 181)
+      }
+
+      h3, h4 {
+        margin: 0px;
       }
 
       canvas {
