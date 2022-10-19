@@ -75,7 +75,7 @@
     fetch('https://raw.githubusercontent.com/Bowserinator/Periodic-Table-JSON/master/PeriodicTableJSON.json')
     .then(data => data.json())
     .then(data => {
-      console.timeEnd('fetching data');
+      console.timeEnd('fetching elements');
       console.log(data);
     });
     console.table(dogs);
