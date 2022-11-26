@@ -50,6 +50,20 @@
       border-left: 1px solid #D1E2FF;
     }
   </style>
+
+  <div class="actions">
+    <form id="addItem">
+      <label for="new-item">Add New Item</label>
+      <input type="text" id="new-item" name="new-item" />
+      <input type="submit" value="Submit" />
+    </form>
+  </div>
+  
+  <div class="actions">
+    <button class="select-all" type="button">Select All</button>
+    <button class="clear-selection" type="button">Clear Selection</button>
+  </div>
+
   <div class="inbox">
     <div class="item">
       <input type="checkbox">
@@ -87,6 +101,8 @@
 
 <script>
   const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+  const selectAll = document.querySelector('.select-all');
+  const clearAll = document.querySelector('.clear-selection');
   let lastChecked;
 
   function handleCheck(e) {
