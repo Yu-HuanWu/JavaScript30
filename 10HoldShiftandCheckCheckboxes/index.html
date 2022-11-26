@@ -122,6 +122,18 @@
     }
     lastChecked = this;
   }
+
+  function handleClick(e) {
+      console.log()
+      checkboxes.forEach(checkbox => {
+        if (e.target.classList.contains('select-all')) {
+          checkbox.checked = true;
+        } else if (e.target.classList.contains('clear-selection')) {
+          checkbox.checked = false;
+        }
+      });
+    };
+
   checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
 </script>
 </body>
