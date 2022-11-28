@@ -137,6 +137,11 @@
   checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
   selectAll.addEventListener('click', handleClick);
   clearAll.addEventListener('click', handleClick);
+
+  itemForm = document.querySelector('#addItem');
+  inbox = document.querySelector('.inbox');
+
+  itemForm.addEventListener("submit", handleSubmit)
 </script>
 </body>
 </html>
