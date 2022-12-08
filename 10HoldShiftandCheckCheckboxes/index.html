@@ -151,6 +151,12 @@
 
     const item = document.createElement('p');
     item.textContent = e.target.elements["new-item"].value;
+
+    const fragment = document.createDocumentFragment();
+    const mydiv = fragment.appendChild(document.createElement('div'));
+    mydiv.append(newCheckbox, item);
+    fragment.firstElementChild.classList.add("item");
+
   };
 </script>
 </body>
