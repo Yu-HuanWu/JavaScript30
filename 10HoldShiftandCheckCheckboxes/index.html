@@ -157,6 +157,10 @@
     mydiv.append(newCheckbox, item);
     fragment.firstElementChild.classList.add("item");
 
+    inbox.append(fragment);
+    checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+    checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
+    //thanks Aaron Brown
   };
 </script>
 </body>
